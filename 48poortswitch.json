@@ -1,0 +1,524 @@
+{
+    "identity": "48poort",
+    "access_ports": [
+        {
+            "interface": 1,
+            "name": "Port 1",
+            "vlan_id": 10
+        },
+        {
+            "interface": 2,
+            "name": "Port 2",
+            "vlan_id": 10
+        },
+        {
+            "interface": 3,
+            "name": "Port 3",
+            "vlan_id": 10
+        },
+        {
+            "interface": 4,
+            "name": "Port 4",
+            "vlan_id": 10
+        },
+        {
+            "interface": 5,
+            "name": "Port 5",
+            "vlan_id": 10
+        },
+        {
+            "interface": 6,
+            "name": "Port 6",
+            "vlan_id": 10
+        },
+        {
+            "interface": 7,
+            "name": "Port 7",
+            "vlan_id": 10
+        },
+        {
+            "interface": 8,
+            "name": "Port 8",
+            "vlan_id": 10
+        },
+        {
+            "interface": 9,
+            "name": "Port 9",
+            "vlan_id": 10
+        },
+        {
+            "interface": 10,
+            "name": "Port 10",
+            "vlan_id": 10
+        },
+        {
+            "interface": 11,
+            "name": "Port 11",
+            "vlan_id": 10
+        },
+        {
+            "interface": 12,
+            "name": "Port 12",
+            "vlan_id": 10
+        },
+        {
+            "interface": 13,
+            "name": "Port 13",
+            "vlan_id": 10
+        },
+        {
+            "interface": 14,
+            "name": "Port 14",
+            "vlan_id": 10
+        },
+        {
+            "interface": 15,
+            "name": "Port 15",
+            "vlan_id": 10
+        },
+        {
+            "interface": 16,
+            "name": "Port 16",
+            "vlan_id": 10
+        },
+        {
+            "interface": 17,
+            "name": "Port 17",
+            "vlan_id": 10
+        },
+        {
+            "interface": 18,
+            "name": "Port 18",
+            "vlan_id": 10
+        },
+        {
+            "interface": 19,
+            "name": "Port 19",
+            "vlan_id": 10
+        },
+        {
+            "interface": 20,
+            "name": "Port 20",
+            "vlan_id": 10
+        },
+        {
+            "interface": 21,
+            "name": "Port 21",
+            "vlan_id": 10
+        },
+        {
+            "interface": 22,
+            "name": "Port 22",
+            "vlan_id": 10
+        },
+        {
+            "interface": 23,
+            "name": "Port 23",
+            "vlan_id": 10
+        },
+        {
+            "interface": 24,
+            "name": "Port 24",
+            "vlan_id": 10
+        },
+        {
+            "interface": 25,
+            "name": "Port 25",
+            "vlan_id": 10
+        },
+        {
+            "interface": 26,
+            "name": "Port 26",
+            "vlan_id": 10
+        },
+        {
+            "interface": 27,
+            "name": "Port 27",
+            "vlan_id": 10
+        },
+        {
+            "interface": 28,
+            "name": "Port 28",
+            "vlan_id": 10
+        },
+        {
+            "interface": 29,
+            "name": "Port 29",
+            "vlan_id": 10
+        },
+        {
+            "interface": 30,
+            "name": "Port 30",
+            "vlan_id": 10
+        },
+        {
+            "interface": 31,
+            "name": "Port 31",
+            "vlan_id": 10
+        },
+        {
+            "interface": 32,
+            "name": "Port 32",
+            "vlan_id": 10
+        },
+        {
+            "interface": 33,
+            "name": "Port 33",
+            "vlan_id": 10
+        },
+        {
+            "interface": 34,
+            "name": "Port 34",
+            "vlan_id": 10
+        },
+        {
+            "interface": 35,
+            "name": "Port 35",
+            "vlan_id": 10
+        },
+        {
+            "interface": 36,
+            "name": "Port 36",
+            "vlan_id": 10
+        },
+        {
+            "interface": 37,
+            "name": "Port 37",
+            "vlan_id": 10
+        },
+        {
+            "interface": 38,
+            "name": "Port 38",
+            "vlan_id": 10
+        },
+        {
+            "interface": 39,
+            "name": "Port 39",
+            "vlan_id": 10
+        },
+        {
+            "interface": 40,
+            "name": "Port 40",
+            "vlan_id": 10
+        },
+        {
+            "interface": 41,
+            "name": "Port 41",
+            "vlan_id": 10
+        },
+        {
+            "interface": 42,
+            "name": "Port 42",
+            "vlan_id": 10
+        },
+        {
+            "interface": 43,
+            "name": "Port 43",
+            "vlan_id": 10
+        },
+        {
+            "interface": 44,
+            "name": "Port 44",
+            "vlan_id": 10
+        },
+        {
+            "interface": 45,
+            "name": "Port 45",
+            "vlan_id": 10
+        },
+        {
+            "interface": 46,
+            "name": "Port 46",
+            "vlan_id": 10
+        },
+        {
+            "interface": 47,
+            "name": "Port 47",
+            "vlan_id": 10
+        },
+        {
+            "interface": 48,
+            "name": "Port 48",
+            "vlan_id": 10
+        }
+    ],
+    "bonding_ports": [
+        {
+            "interface1": 51,
+            "interface2": 52,
+            "name": "uplink2core",
+            "vlans": [
+                4,
+                10,
+                20,
+                50,
+                100,
+                101,
+                102,
+                103,
+                112,
+                201,
+                202,
+                220,
+                251,
+                254
+            ]
+        }
+    ],
+    "has_POE": true,
+    "hostname": "192.168.88.1",
+    "poe_ports": [
+        {
+            "poe_output": "off",
+            "port_id": 1
+        },
+        {
+            "poe_output": "off",
+            "port_id": 2
+        },
+        {
+            "poe_output": "off",
+            "port_id": 3
+        },
+        {
+            "poe_output": "off",
+            "port_id": 4
+        },
+        {
+            "poe_output": "off",
+            "port_id": 5
+        },
+        {
+            "poe_output": "off",
+            "port_id": 6
+        },
+        {
+            "poe_output": "off",
+            "port_id": 7
+        },
+        {
+            "poe_output": "off",
+            "port_id": 8
+        },
+        {
+            "poe_output": "off",
+            "port_id": 9
+        },
+        {
+            "poe_output": "off",
+            "port_id": 10
+        },
+        {
+            "poe_output": "off",
+            "port_id": 11
+        },
+        {
+            "poe_output": "off",
+            "port_id": 12
+        },
+        {
+            "poe_output": "off",
+            "port_id": 13
+        },
+        {
+            "poe_output": "off",
+            "port_id": 14
+        },
+        {
+            "poe_output": "off",
+            "port_id": 15
+        },
+        {
+            "poe_output": "off",
+            "port_id": 16
+        },
+        {
+            "poe_output": "off",
+            "port_id": 17
+        },
+        {
+            "poe_output": "off",
+            "port_id": 18
+        },
+        {
+            "poe_output": "off",
+            "port_id": 19
+        },
+        {
+            "poe_output": "off",
+            "port_id": 20
+        },
+        {
+            "poe_output": "off",
+            "port_id": 21
+        },
+        {
+            "poe_output": "off",
+            "port_id": 22
+        },
+        {
+            "poe_output": "off",
+            "port_id": 23
+        },
+        {
+            "poe_output": "off",
+            "port_id": 24
+        },
+        {
+            "poe_output": "off",
+            "port_id": 25
+        },
+        {
+            "poe_output": "off",
+            "port_id": 26
+        },
+        {
+            "poe_output": "off",
+            "port_id": 27
+        },
+        {
+            "poe_output": "off",
+            "port_id": 28
+        },
+        {
+            "poe_output": "off",
+            "port_id": 29
+        },
+        {
+            "poe_output": "off",
+            "port_id": 30
+        },
+        {
+            "poe_output": "off",
+            "port_id": 31
+        },
+        {
+            "poe_output": "off",
+            "port_id": 32
+        },
+        {
+            "poe_output": "off",
+            "port_id": 33
+        },
+        {
+            "poe_output": "off",
+            "port_id": 34
+        },
+        {
+            "poe_output": "off",
+            "port_id": 35
+        },
+        {
+            "poe_output": "off",
+            "port_id": 36
+        },
+        {
+            "poe_output": "off",
+            "port_id": 37
+        },
+        {
+            "poe_output": "off",
+            "port_id": 38
+        },
+        {
+            "poe_output": "off",
+            "port_id": 39
+        },
+        {
+            "poe_output": "off",
+            "port_id": 40
+        },
+        {
+            "poe_output": "off",
+            "port_id": 41
+        },
+        {
+            "poe_output": "off",
+            "port_id": 42
+        },
+        {
+            "poe_output": "off",
+            "port_id": 43
+        },
+        {
+            "poe_output": "off",
+            "port_id": 44
+        },
+        {
+            "poe_output": "off",
+            "port_id": 45
+        },
+        {
+            "poe_output": "off",
+            "port_id": 46
+        },
+        {
+            "poe_output": "off",
+            "port_id": 47
+        },
+        {
+            "poe_output": "off",
+            "port_id": 48
+        }
+    ],
+    "trunk_ports": [],
+    "username": "admin",
+    "vlans": [
+        {
+            "name": "beheer",
+            "vlan_id": 1
+        },
+        {
+            "name": "werkstations",
+            "vlan_id": 4
+        },
+        {
+            "name": "kantoor",
+            "vlan_id": 10
+        },
+        {
+            "name": "publiek",
+            "vlan_id": 20
+        },
+        {
+            "name": "OU",
+            "vlan_id": 50
+        },
+        {
+            "name": "vmotion",
+            "vlan_id": 100
+        },
+        {
+            "name": "vmkernel",
+            "vlan_id": 101
+        },
+        {
+            "name": "Storage",
+            "vlan_id": 102
+        },
+        {
+            "name": "Replication",
+            "vlan_id": 103
+        },
+        {
+            "name": "Backup",
+            "vlan_id": 112
+        },
+        {
+            "name": "Wifi",
+            "vlan_id": 201
+        },
+        {
+            "name": "DMZ",
+            "vlan_id": 202
+        },
+        {
+            "name": "wifi-AP",
+            "vlan_id": 220
+        },
+        {
+            "name": "Test-ICT",
+            "vlan_id": 254
+        }
+    ]
+}
