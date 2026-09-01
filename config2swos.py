@@ -9,18 +9,17 @@
 # commandline options
 # dryrun
 # documentation
-# json-schema
-# support for 48 ports switches
 # settings in /sys.b per port
+# POE settings per port ?
 # join acces + trunk + LAG into one port-type
 # bonding ports use a list of interfaces instead of the interface1 and interface2
 
-# dubbesl array dinger test met
+# dubbel array dinger test met
 # python config2swos.py --hostname 127.0.0.1 --configfile Configs\48poortswitch.json --password thepassword
 
 import logging
 import argparse
-#import jsonschema
+import jsonschema
 
 parser = argparse.ArgumentParser(description='Write a config to a mikrotik SWoS switch')
 parser.add_argument('--hostname')
@@ -40,21 +39,21 @@ if args.debug:
 import json
 with open(filename, 'r') as file:
     data = json.load(file)
-if False:
-    # the schema is not niet goed
-    with open("Configs\\configs.schema.json", 'r') as file:
-        schema = json.load(file)
 
-    try:
-        jsonschema.validate(instance = data, schema = schema)
-        print("Success: Data is valid!")
-    except jsonschema.exceptions.ValidationError as err:
-        print(f"Validation Error: {err.message}")
-    except jsonschema.exceptions.SchemaError as err:
-        print(f"The schema itself is invalid: {err.message}")
+# the schema is not niet goed
+with open("Configs\\configs.schema.json", 'r') as file:
+    schema = json.load(file)
+
+try:
+    jsonschema.validate(instance = data, schema = schema)
+    print("Success: Data is valid!")
+except jsonschema.exceptions.ValidationError as err:
+    print(f"Validation Error: {err.message}")
+except jsonschema.exceptions.SchemaError as err:
+    print(f"The schema itself is invalid: {err.message}")
     
 username = "admin"    # there is no other user
-#password = data["password"]
+
 if "hostname" in data:
     hostname = data["hostname"]
 else:
@@ -66,13 +65,12 @@ if "has_POE" in data:
     has_POE = data["has_POE"]
 else:
     has_POE = False
+
 if args.has_POE:
     has_POE = args.has_POE
 
 from mikrotik_swos import mikrotik_system
 system = mikrotik_system.Mikrotik_System(hostname,username,password)
-#system.show()
-#system.set(allow_from_port = [1,2,3,4], dhcp_trusted_port  = [5,6,7,8], igmp_fast_leave = [9,10,11,12], mikrotik_discovery_protocol =[1,3,5,7])
 
 from mikrotik_swos import mikrotik_vlans
 vlans = mikrotik_vlans.Mikrotik_Vlans(hostname,username,password)
