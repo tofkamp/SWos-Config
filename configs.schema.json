@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tofkamp/SWos-Config/configs.schema.json",
+  "title": "SWos-Config switch configuration",
+  "description": "Desired-state configuration for a MikroTik SwOS switch, consumed by config2swos.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["identity", "vlans", "access_ports", "trunk_ports", "bonding_ports"],
+  "properties": {
+    "identity": {
+      "type": "string",
+      "minLength": 1,
+      "description": "System identity / name written to the switch (system.set(identity=...))."
+    },
+    "hostname": {
+      "type": "string",
+      "description": "IP address or hostname used to reach the switch. Defaults to 192.168.88.1 if omitted, or overridden by --hostname on the command line.",
+      "default": "192.168.88.1"
+    },
+    "username": {
+      "type": "string",
+      "description": "Present for documentation purposes only; the script always connects as 'admin' regardless of this value.",
+      "default": "admin"
+    },
+    "has_POE": {
+      "type": "boolean",
+      "description": "Whether the switch supports PoE. Enables processing of poe_ports and loads the PoE module. Defaults to false, or overridden by --has_POE on the command line.",
+      "default": false
+    },
+    "vlans": {
+      "type": "array",
+      "description": "VLANs to create/ensure exist on the switch.",
+      "items": { "$ref": "#/$defs/vlan" }
+    },
+    "access_ports": {
+      "type": "array",
+      "description": "Ports carrying a single untagged VLAN.",
+      "items": { "$ref": "#/$defs/accessPort" }
+    },
+    "trunk_ports": {
+      "type": "array",
+      "description": "Ports carrying multiple tagged VLANs, optionally with one untagged (hybrid) VLAN.",
+      "items": { "$ref": "#/$defs/trunkPort" }
+    },
+    "bonding_ports": {
+      "type": "array",
+      "description": "LACP-bonded port pairs carrying multiple VLANs, optionally with one untagged (hybrid) VLAN.",
+      "items": { "$ref": "#/$defs/bondingPort" }
+    },
+    "poe_ports": {
+      "type": "array",
+      "description": "Per-port PoE output configuration. Only applied when has_POE is true.",
+      "items": { "$ref": "#/$defs/poePort" },
+      "default": []
+    }
+  },
+
+  "$defs": {
+    "portNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Physical switch port number (SFP/combo ports typically use the higher-numbered interfaces, e.g. 51/52 on a 48-port switch)."
+    },
+
+    "vlanId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4094
+    },
+
+    "lacpMode": {
+      "type": "string",
+      "enum": ["off", "passive", "active", "static"],
+      "description": "LACP mode for the port. 'static' requires group_id to also be set."
+    },
+
+    "portSettings": {
+      "description": "Common per-port link settings, merged over ports_defaults (enabled: true, autoneg: true, duplex: false, tx_flow_control: true, rx_flow_control: false, speed: 1000). All are optional overrides.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Port label. On access/trunk ports this is prefixed with the port number and truncated to 16 characters by the switch."
+        },
+        "enabled": { "type": "boolean" },
+        "autoneg": { "type": "boolean" },
+        "duplex": {
+          "type": "boolean",
+          "description": "true = half duplex, false = full duplex (per mikrotik_swos convention)."
+        },
+        "tx_flow_control": { "type": "boolean" },
+        "rx_flow_control": { "type": "boolean" },
+        "speed": {
+          "type": "integer",
+          "enum": [10, 100, 1000, 2500, 5000, 10000],
+          "description": "Link speed in Mbps."
+        },
+        "mode": { "$ref": "#/$defs/lacpMode" },
+        "group_id": {
+          "type": "integer",
+          "description": "LACP group id. Required when mode is 'static'."
+        }
+      }
+    },
+
+    "vlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vlan_id"],
+      "properties": {
+        "vlan_id": { "$ref": "#/$defs/vlanId" },
+        "name": {
+          "type": "string",
+          "description": "Defaults to 'VLAN <id>' if omitted."
+        },
+        "port_isolation": { "type": "boolean", "default": false },
+        "learning": { "type": "boolean", "default": true },
+        "mirror": { "type": "boolean", "default": false },
+        "igmp_snooping": { "type": "boolean", "default": false }
+      }
+    },
+
+    "accessPort": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/$defs/portSettings" }],
+      "required": ["interface", "vlan_id"],
+      "properties": {
+        "interface": { "$ref": "#/$defs/portNumber" },
+        "vlan_id": {
+          "$ref": "#/$defs/vlanId",
+          "description": "The single untagged VLAN this port belongs to. Also used as the port's default VLAN ID."
+        }
+      }
+    },
+
+    "trunkPort": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/$defs/portSettings" }],
+      "required": ["interface", "vlans"],
+      "properties": {
+        "interface": { "$ref": "#/$defs/portNumber" },
+        "vlans": {
+          "type": "array",
+          "description": "Tagged VLANs carried on this trunk.",
+          "items": { "$ref": "#/$defs/vlanId" }
+        },
+        "untagged_vlan": {
+          "$ref": "#/$defs/vlanId",
+          "description": "If set, makes this a hybrid trunk: this VLAN is received untagged (receive_mode 'any') and is also added to the trunk's VLAN membership. If omitted, the port only accepts tagged frames (receive_mode 'only tagged')."
+        }
+      }
+    },
+
+    "bondingPort": {
+      "type": "object",
+      "required": ["interface1", "interface2", "name", "vlans"],
+      "properties": {
+        "interface1": { "$ref": "#/$defs/portNumber" },
+        "interface2": { "$ref": "#/$defs/portNumber" },
+        "name": {
+          "type": "string",
+          "description": "Name applied directly to both bonded ports (not prefixed/truncated like access/trunk port names)."
+        },
+        "vlans": {
+          "type": "array",
+          "description": "Tagged VLANs carried on this LACP bond.",
+          "items": { "$ref": "#/$defs/vlanId" }
+        },
+        "untagged_vlan": {
+          "$ref": "#/$defs/vlanId",
+          "description": "If set, makes this a hybrid bond: this VLAN is received untagged on both member ports and added to the bond's VLAN membership."
+        },
+        "mode": {
+          "$ref": "#/$defs/lacpMode",
+          "description": "Defaults to 'active' for bonding ports."
+        },
+        "group_id": {
+          "type": "integer",
+          "description": "LACP group id. Required when mode is 'static'."
+        }
+      }
+    },
+
+    "poePort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["port_id", "poe_output"],
+      "properties": {
+        "port_id": { "$ref": "#/$defs/portNumber" },
+        "poe_output": {
+          "type": "string",
+          "enum": ["off", "auto", "low", "high"]
+        },
+        "priority": {
+          "type": "integer",
+          "description": "PoE priority, used when the power budget is exceeded.",
+          "default": 4
+        },
+        "lldp_enabled": { "type": "boolean", "default": false }
+      }
+    }
+  }
+}
