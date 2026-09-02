@@ -2,45 +2,11 @@
 
 This guide explains how to write the JSON config file that `config2swos.py` uploads to a MikroTik SwOS switch. It matches [`configs.schema.json`](./configs.schema.json) — if you use an editor with JSON Schema support (VS Code, for example), point it at that file and you'll get autocomplete and inline validation while you type.
 
-I have included an manual for writing a configure file. You can find this at (./writing-a-config-file).
-
-This is an example configuration file
-```json
-{
-  "identity": "48poort",
-  "hostname": "192.168.88.1",
-  "has_POE": true,
-  "vlans": [
-    { "name": "beheer", "vlan_id": 1 },
-    { "name": "kantoor", "vlan_id": 10 },
-    { "name": "publiek", "vlan_id": 20 }
-  ],
-  "access_ports": [
-    { "interface": 1, "name": "Port 1", "vlan_id": 10 },
-    { "interface": 2, "name": "Port 2", "vlan_id": 10 }
-  ],
-  "trunk_ports": [],
-  "bonding_ports": [
-    {
-      "interface1": 51,
-      "interface2": 52,
-      "name": "uplink2core",
-      "vlans": [1, 10, 20]
-    }
-  ],
-  "poe_ports": [
-    { "port_id": 1, "poe_output": "off" },
-    { "port_id": 2, "poe_output": "off" }
-  ]
-}
-```
-
-
 ```
 python config2swos.py --hostname 192.168.88.1 --configfile myconfig.json --password thepassword
 ```
 
-## The basic shape
+## The configuration file
 
 Every config file is a single JSON object with these top-level keys:
 
