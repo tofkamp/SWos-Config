@@ -6,16 +6,15 @@
 # opruimen oude funkties
 # add poe to acces/trunk/bond struct ?
 # system: add dhcp_trusted_ports allow_from_port , igmp_fast_leave and discovery_protocol to acces/trunk/bond struct ?
-# commandline options
 # dryrun
 # documentation
 # settings in /sys.b per port
 # POE settings per port ?
 # join acces + trunk + LAG into one port-type
 # bonding ports use a list of interfaces instead of the interface1 and interface2
+# handle config file without access_ports, trunk_ports and bondig_ports
 
-# dubbel array dinger test met
-# python config2swos.py --hostname 127.0.0.1 --configfile Configs\48poortswitch.json --password thepassword
+# python config2swos.py --hostname 192.168.88.1 --configfile Configs/48poortswitch.json --password thepassword
 
 import logging
 import argparse
